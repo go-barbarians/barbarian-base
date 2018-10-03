@@ -1,2 +1,2 @@
 #!/bin/sh
-/opt/python27/bin/python /opt/barbarian/control/basename.py $@
+/usr/bin/python /opt/barbarian/control/basename.py $@

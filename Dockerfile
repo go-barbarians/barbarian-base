@@ -9,13 +9,6 @@ ENV HADOOP_USER=hadoop \
     HADOOP_CLASSPATH=/opt/barbarian/hadoop/etc/hadoop:/opt/barbarian/hadoop/share/hadoop/common/lib/*:/opt/barbarian/hadoop/share/hadoop/common/*:/opt/barbarian/hadoop/share/hadoop/yarn/*:/opt/barbarian/hadoop/share/hadoop/yarn/lib/*:/opt/barbarian/tez/conf:/opt/barbarian/hive/lib/*:/opt/barbarian/tez/lib/*:/opt/barbarian/tez/* \
     CONTROL_HOME=/opt/barbarian/control
 
-#RUN apt-get update && \
-#    apt-get install -y openjdk-8-jre-headless python2.7 openssl locales ca-certificates-java wget
-#RUN apt-get clean && \
-#    update-ca-certificates -f && \
-#    rm -rf /var/lib/apt/lists/*
-
-#RUN ln -s /usr/bin/python2.7 /usr/bin/python
 RUN ln -s /opt/python27/bin/python /usr/bin/python
 RUN mkdir -p /opt/barbarian
 
@@ -25,7 +18,6 @@ COPY ./opt/barbarian/ignite/libs/ignite-*.jar /opt/barbarian/hadoop/share/hadoop
 COPY ./opt/barbarian/ignite/libs/ignite-hadoop/ignite-*.jar /opt/barbarian/hadoop/share/hadoop/common/lib/
 
 RUN ln -s /opt/barbarian/control/basename /usr/bin/basename
-RUN ln -s /opt/barbarian/control/dirname /usr/bin/dirname
 RUN ln -s /opt/barbarian/control/which /usr/bin/which
 RUN ln -s /opt/barbarian/control/env /usr/bin/env
 

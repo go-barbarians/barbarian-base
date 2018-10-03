@@ -2,8 +2,12 @@ FROM dockerbarbarians/gpl-free-base-image:latest
 
 ENV HADOOP_USER=hadoop \
     HADOOP_LOG_DIR=/var/log/hadoop \
-    JAVA_HOME=/opt/jdk8/jdk-8u181-ojdkbuild-linux-x64 \
+    JAVA_HOME=/opt/java8/jdk-8u181-ojdkbuild-linux-x64 \
     HADOOP_HOME=/opt/barbarian/hadoop \
+    HADOOP_COMMON_HOME=/opt/barbarian/hadoop/share/hadoop/common \
+    HADOOP_YARN_HOME=/opt/barbarian/hadoop/share/hadoop/yarn \
+    HADOOP_MAPRED_HOME=/opt/barbarian/hadoop/share/hadoop/mapreduce \
+    HADOOP_HDFS_HOME=/opt/barbarian/hadoop/share/hadoop/hdfs \
     HADOOP_CONF_DIR=/opt/barbarian/hadoop/etc/hadoop \
     YARN_CONF_DIR=/opt/barbarian/hadoop/etc/hadoop \
     HADOOP_CLASSPATH=/opt/barbarian/hadoop/etc/hadoop:/opt/barbarian/hadoop/share/hadoop/common/lib/*:/opt/barbarian/hadoop/share/hadoop/common/*:/opt/barbarian/hadoop/share/hadoop/yarn/*:/opt/barbarian/hadoop/share/hadoop/yarn/lib/*:/opt/barbarian/tez/conf:/opt/barbarian/hive/lib/*:/opt/barbarian/tez/lib/*:/opt/barbarian/tez/* \

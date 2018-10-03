@@ -58,4 +58,5 @@ echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh
 
 echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
+chmod +x $JAVA_INSTALL_DIR/$JAVA_INSTALL_VERSION/bin/java
 chmod +x $JAVA_INSTALL_DIR/$JAVA_INSTALL_VERSION/jre/bin/java

@@ -24,6 +24,7 @@ COPY ./opt/barbarian/ignite/libs/ignite-hadoop/ignite-*.jar /opt/barbarian/hadoo
 RUN ln -s /opt/barbarian/control/basename /usr/bin/basename
 RUN ln -s /opt/barbarian/control/which /usr/bin/which
 RUN ln -s /opt/barbarian/control/env /usr/bin/env
+RUN ln -s /opt/barbarian/control/declare /usr/bin/declare
 
 RUN echo "$HADOOP_USER:!::1000:::::" >> /etc/shadow
 RUN echo "$HADOOP_USER:!::1000:::::" >> /etc/shadow

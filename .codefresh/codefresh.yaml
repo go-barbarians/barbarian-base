@@ -1,0 +1,42 @@
+version: '1.0'
+steps:
+  get_hive:
+    title: get packages
+    description: Gets the latest packages
+    image: ubuntu:16.04
+    commands:
+      - apt-get update && apt-get upgrade -y && apt-get install -y python-pip unzip
+      - pip install awscli
+      - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+      - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      - aws configure set default.region eu-west-1
+      - aws s3 cp s3://mvn.barbarians.io/apache-ignite-hadoop-$IGNITE_BUILD_NUMBER-bin.zip .
+      - aws s3 cp s3://mvn.barbarians.io/hadoop-$HADOOP_BUILD_NUMBER.tar.gz .
+      - tar -xzf hadoop-$HADOOP_BUILD_NUMBER.tar.gz
+      - unzip -o apache-ignite-hadoop-$IGNITE_BUILD_NUMBER-bin.zip
+      - mkdir -p opt/barbarian
+      - mkdir -p opt/barbarian/hadoop
+      - mkdir -p opt/barbarian/ignite
+      - cp -R hadoop-$HADOOP_BUILD_NUMBER/* opt/barbarian/hadoop
+      - cp -R apache-ignite-hadoop-$IGNITE_BUILD_NUMBER-bin/* opt/barbarian/ignite
+
+      # cleardown
+      - rm -f hadoop-$HADOOP_BUILD_NUMBER.tar.gz
+      - rm -f apache-ignite-hadoop-$IGNITE_BUILD_NUMBER-bin.zip
+    entry_point:
+      - /bin/bash
+
+  build_image:
+    type: build
+    description: Building the image...
+    image-name: dockerbarbarians/barbarian-base
+    tag: develop
+
+  push_image:
+    type: push
+    description: Push image to repo
+    candidate: '${{build_image}}'
+    tag: unstable
+    credentials:
+      username: '${{DOCKER_USER}}'
+      password: '${{DOCKER_PASS}}'

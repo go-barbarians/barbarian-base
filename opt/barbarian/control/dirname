@@ -1,0 +1,2 @@
+#!/bin/sh
+/opt/python27/bin/python /opt/barbarian/control/dirname.py $@

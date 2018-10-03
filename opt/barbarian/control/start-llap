@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+# Copyright 2018 Barbarians.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#
+# Usage: start-llap [OPTIONS]
+# Launches Hive LLAP based on the supplied options.
+#     --llapd_count       How many LLAP daemons to spawn on YARN.
+#                         The default is 3.
+
+#     --llapd_ram         How much RAM to grant the LLAP daemons.
+#                         The default is 2g.
+
+USER=`whoami`
+HOST=`hostname -s`
+DOMAIN=`hostname -d`
+LLAPD_COUNT=3
+LLAPD_RAM=2g
+
+function print_usage() {
+echo "\
+Usage: start-llap [OPTIONS]
+Launches Hive LLAP based on the supplied options.
+     --llapd_count       How many LLAP daemons to spawn on YARN.
+                         The default is 3.
+
+     --llapd_ram         How much RAM to grant the LLAP daemons.
+                         The default is 2g.
+"
+}
+
+CONTROL_DIR=`dirname $(readlink -f $0)`
+source $CONTROL_DIR/common-functions.sh
+
+optspec=":hv-:"
+while getopts "$optspec" optchar; do
+
+    case "${optchar}" in
+        -)
+            case "${OPTARG}" in
+                llapd_count=*)
+                    LLAPD_COUNT=${OPTARG##*=}
+                    ;;
+                llapd_ram=*)
+                    LLAPD_RAM=${OPTARG##*=}
+                    ;;
+                *)
+                    echo "Unknown option --${OPTARG}" >&2
+                    exit 1
+                    ;;
+            esac;;
+        h)
+            print_usage
+            exit
+            ;;
+        v)
+            echo "Parsing option: '-${optchar}'" >&2
+            ;;
+        *)
+            if [ "$OPTERR" != 1 ] || [ "${optspec:0:1}" = ":" ]; then
+                echo "Non-option argument: '-${OPTARG}'" >&2
+            fi
+            ;;
+    esac
+done
+
+COMMON_FUNCTIONS="common-functions.sh"
+
+export SLIDER_HOME=$SLIDER_HOME
+export PATH=$PATH:$SLIDER_HOME/bin
+
+pushd /tmp
+$HIVE_HOME/bin/hive --service llap --name llap --instances $LLAPD_COUNT --size $LLAPD_RAM && \
+llap-slider-$(date +%d%b%Y)/run.sh
+
+popd

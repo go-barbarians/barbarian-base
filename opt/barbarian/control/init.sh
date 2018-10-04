@@ -1,5 +1,7 @@
 #!/bin/mksh
 
+cd /tmp
+
 if [[ -z "${GLIBC_REPO}" ]]
 then
 	GLIBC_REPO=https://github.com/sgerrand/alpine-pkg-glibc
@@ -45,12 +47,12 @@ $PYTHON $UNZIP -t /tmp/jdk.zip -o $JAVA_INSTALL_DIR
 
 mkdir -p /opt/glibc
 
+cd /opt/glibc
 for pkg in glibc-${GLIBC_VERSION} glibc-bin-${GLIBC_VERSION} glibc-i18n-${GLIBC_VERSION}
 do 
-	cd /opt/glibc
 	$PYTHON $UNTAR /tmp/${pkg}.apk
-	cd /
 done
+cd /tmp
 
 #todo: fails currently
 #/usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 

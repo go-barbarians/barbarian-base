@@ -35,6 +35,7 @@ RUN echo "$HADOOP_USER:x:1000:1000:$HADOOP_USER:/opt/barbarian:/bin/mksh" >> /et
 RUN mkdir -p $HADOOP_LOG_DIR \
     && mkdir -p /grid/0 \
     && mkdir -p /home/$HADOOP_USER \
+    && chown -R "$HADOOP_USER" /opt/python27 \
     && chown -R "$HADOOP_USER" $HADOOP_LOG_DIR \
     && chown -R "$HADOOP_USER" /grid/0 \
     && chown -R "$HADOOP_USER" /opt/barbarian \

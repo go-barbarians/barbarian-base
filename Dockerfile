@@ -32,15 +32,11 @@ RUN echo "$HADOOP_USER:!::1000:::::" >> /etc/shadow
 RUN echo "$HADOOP_USER:x:1000:$HADOOP_USER" >> /etc/group
 RUN echo "$HADOOP_USER:x:1000:1000:$HADOOP_USER:/opt/barbarian:/bin/mksh" >> /etc/passwd
 
+# dynamically downloading and installing glibc and java at pod initialization time means the 
+# whole system path needs to either belong to the hadoop user, or the hadoop user needs to be root.
 RUN mkdir -p $HADOOP_LOG_DIR \
     && mkdir -p /grid/0 \
     && mkdir -p /home/$HADOOP_USER \
-    && chown -R "$HADOOP_USER" /opt/python27 \
-    && chown -R "$HADOOP_USER" $HADOOP_LOG_DIR \
-    && chown -R "$HADOOP_USER" /grid/0 \
-    && chown -R "$HADOOP_USER" /opt/barbarian \
-    && chgrp -R "$HADOOP_USER" $HADOOP_LOG_DIR \
-    && chgrp -R "$HADOOP_USER" /grid/0 \
-    && chgrp -R "$HADOOP_USER" /home/$HADOOP_USER \
+    && chown -R "$HADOOP_USER" / \
     && ln -s /opt/barbarian/hadoop/etc/hadoop /etc/hadoop
 

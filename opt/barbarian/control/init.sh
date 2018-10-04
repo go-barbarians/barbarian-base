@@ -43,20 +43,19 @@ mkdir -p $JAVA_INSTALL_DIR
 
 $PYTHON $UNZIP -t /tmp/jdk.zip -o $JAVA_INSTALL_DIR
 
+mkdir -p /opt/glibc
+
 for pkg in glibc-${GLIBC_VERSION} glibc-bin-${GLIBC_VERSION} glibc-i18n-${GLIBC_VERSION}
 do 
+	cd /opt/glibc
 	$PYTHON $UNTAR /tmp/${pkg}.apk
+	cd /
 done
 
 #todo: fails currently
 #/usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 
 
-mkdir -p /etc/profile.d
-echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh
-
-/usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib
-
-echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
+/opt/glibc/usr/glibc-compat/sbin/ldconfig -C /opt/glibc/usr/glibc-compat/etc/ld.so.cache -f /opt/glibc/usr/glibc-compat/etc/ld.so.conf /opt/glibc/lib /opt/glibc/usr/glibc-compat/lib
 
 chmod +x $JAVA_INSTALL_DIR/$JAVA_INSTALL_VERSION/bin/java
 chmod +x $JAVA_INSTALL_DIR/$JAVA_INSTALL_VERSION/jre/bin/java

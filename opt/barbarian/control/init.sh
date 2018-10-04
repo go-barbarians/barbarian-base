@@ -27,17 +27,17 @@ then
 	BASH_REPO=http://dl-cdn.alpinelinux.org/alpine/v3.3/main/x86_64
 fi
 
-if [[ -z ${BASH_APK}" ]]
+if [[ -z "${BASH_APK}" ]]
 then
 	BASH_APK=bash-4.3.42-r6.apk
 fi
 
-if [[ -z ${BASH_NCURSES_APK}" ]]
+if [[ -z "${BASH_NCURSES_APK}" ]]
 then
 	BASH_NCURSES_APK=ncurses-libs-6.0_p20170701-r0.apk
 fi
 
-if [[ -z ${BASH_READLINE_APK}" ]]
+if [[ -z "${BASH_READLINE_APK}" ]]
 then
 	BASH_READLINE_APK=readline-6.3.008-r4.apk
 fi
@@ -88,7 +88,7 @@ chmod +x $JAVA_INSTALL_DIR/$JAVA_INSTALL_VERSION/jre/bin/java
 
 # fix host resolution
 HOSTNAME=$(cat /etc/hostname)
-echo "127.0.0.1 localhost $HOSTNAME" > /etc/hosts
+echo "127.0.0.1 localhost ${HOSTNAME}" > /etc/hosts
 echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
 python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_APK -t /tmp/bash.apk

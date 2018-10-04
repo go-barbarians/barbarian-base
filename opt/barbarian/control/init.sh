@@ -27,17 +27,17 @@ then
 	BASH_REPO=http://dl-cdn.alpinelinux.org/alpine/v3.3/main/x86_64
 fi
 
-if [[ -Z ${BASH_APK}" ]]
+if [[ -z ${BASH_APK}" ]]
 then
 	BASH_APK=bash-4.3.42-r6.apk
 fi
 
-if [[ -Z ${BASH_NCURSES_APK}" ]]
+if [[ -z ${BASH_NCURSES_APK}" ]]
 then
 	BASH_NCURSES_APK=ncurses-libs-6.0_p20170701-r0.apk
 fi
 
-if [[ -Z ${BASH_READLINE_APK}" ]]
+if [[ -z ${BASH_READLINE_APK}" ]]
 then
 	BASH_READLINE_APK=readline-6.3.008-r4.apk
 fi

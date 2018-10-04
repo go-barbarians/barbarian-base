@@ -1,0 +1,2 @@
+#!/bin/sh
+python /opt/barbarian/control/regex_match.py $@

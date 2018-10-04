@@ -46,10 +46,6 @@ RUN echo "$HADOOP_USER:x:1000:1000:$HADOOP_USER:/opt/barbarian:/bin/mksh" >> /et
 RUN ln -s /opt/glibc/usr/glibc-compat/etc/ld.so.cache /etc/ld.so.cache
 RUN ln -s /opt/glibc/usr/glibc-compat/etc/ld.so.conf /etc/ld.so.conf
 
-RUN echo "/opt/glibc/usr/glibc-compat/lib" >> /opt/glibc/usr/glibc-compat/etc/ld.so.conf
-RUN echo "/opt/glibc/lib" >> /opt/glibc/usr/glibc-compat/etc/ld.so.conf
-RUN echo "/opt/glibc/usr/lib" >> /opt/glibc/usr/glibc-compat/etc/ld.so.conf
-
 # dynamically downloading and installing glibc and java at pod initialization time means the 
 # whole system path needs to either belong to the hadoop user, or the hadoop user needs to be root.
 RUN mkdir -p $HADOOP_LOG_DIR \

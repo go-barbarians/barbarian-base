@@ -55,6 +55,10 @@ done
 #todo: fails currently
 #/usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 
 
+echo "/opt/glibc/usr/glibc-compat/lib" >> /opt/glibc/usr/glibc-compat/etc/ld.so.conf
+echo "/opt/glibc/lib" >> /opt/glibc/usr/glibc-compat/etc/ld.so.conf
+echo "/opt/glibc/usr/lib" >> /opt/glibc/usr/glibc-compat/etc/ld.so.conf
+
 /opt/glibc/usr/glibc-compat/sbin/ldconfig -C /opt/glibc/usr/glibc-compat/etc/ld.so.cache -f /opt/glibc/usr/glibc-compat/etc/ld.so.conf /opt/glibc/lib /opt/glibc/usr/glibc-compat/lib
 
 chmod +x $JAVA_INSTALL_DIR/$JAVA_INSTALL_VERSION/bin/java

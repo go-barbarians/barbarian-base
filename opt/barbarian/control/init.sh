@@ -22,6 +22,26 @@ then
 	JAVA_INSTALL_VERSION=jdk-8u181-ojdkbuild-linux-x64
 fi
 
+if [[ -z "${BASH_REPO}" ]]
+then
+	BASH_REPO=http://dl-cdn.alpinelinux.org/alpine/v3.3/main/x86_64
+fi
+
+if [[ -Z ${BASH_APK}" ]]
+then
+	BASH_APK=bash-4.3.42-r6.apk
+fi
+
+if [[ -Z ${BASH_NCURSES_APK}" ]]
+then
+	BASH_NCURSES_APK=ncurses-libs-6.0_p20170701-r0.apk
+fi
+
+if [[ -Z ${BASH_READLINE_APK}" ]]
+then
+	BASH_READLINE_APK=readline-6.3.008-r4.apk
+fi
+
 PYTHON=/opt/python27/bin/python
 DOWNLOADER=/opt/barbarian/control/download.py
 UNTAR=/opt/barbarian/control/untar.py
@@ -71,7 +91,14 @@ HOSTNAME=$(cat /etc/hostname)
 echo "127.0.0.1 localhost $HOSTNAME" > /etc/hosts
 echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
-# YARN actually stops with an error if it doesn't find the Bash shell onboard.
-# remains to be seen if it is really a requirement or not.
-# for now we'll just fake a bash shell
-ln -s /bin/mksh /bin/bash
+python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_APK -t /tmp/bash.apk
+python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_NCURSES_APK -t /tmp/ncurses.apk
+python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_READLINE_APK -t /tmp/readline.apk
+
+# this path is prebaked, along with a symlink to /bin/bash and LD_LIBRARY_PATH env var.
+cd /opt/bash
+python /opt/barbarian/control/untar.py /tmp/bash.apk
+python /opt/barbarian/control/untar.py /tmp/ncurses.apk
+python /opt/barbarian/control/untar.py /tmp/readline.apk
+
+cd /tmp

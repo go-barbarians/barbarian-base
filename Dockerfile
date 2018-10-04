@@ -15,7 +15,8 @@ ENV HADOOP_USER=hadoop \
     YARN_CONF_DIR=/opt/barbarian/hadoop/etc/hadoop \
     HADOOP_CLASSPATH=/opt/barbarian/hadoop/etc/hadoop:/opt/barbarian/hadoop/share/hadoop/common/lib/*:/opt/barbarian/hadoop/share/hadoop/common/*:/opt/barbarian/hadoop/share/hadoop/yarn/*:/opt/barbarian/hadoop/share/hadoop/yarn/lib/*:/opt/barbarian/tez/conf:/opt/barbarian/hive/lib/*:/opt/barbarian/tez/lib/*:/opt/barbarian/tez/* \
     CONTROL_HOME=/opt/barbarian/control \
-    HADOOP_HEAPSIZE=2g
+    HADOOP_HEAPSIZE=2g \
+    LD_LIBRARY_PATH=/opt/bash/usr/lib
 
 RUN ln -s /opt/python27/bin/python /usr/bin/python
 RUN mkdir -p /opt/barbarian
@@ -52,11 +53,16 @@ RUN echo "$HADOOP_USER:x:1000:1000:$HADOOP_USER:/opt/barbarian:/bin/mksh" >> /et
 RUN ln -s /opt/glibc/usr/glibc-compat/etc/ld.so.cache /etc/ld.so.cache
 RUN ln -s /opt/glibc/usr/glibc-compat/etc/ld.so.conf /etc/ld.so.conf
 
+# bash is a mandatory prerequisite for Hadoop 3.
+RUN mkdir -p /opt/bash
+RUN ln -s /opt/bash/bin/bash /bin/bash
+
 # dynamically downloading and installing glibc and java at pod initialization time means the 
 # whole system path needs to either belong to the hadoop user, or the hadoop user needs to be root.
 RUN mkdir -p $HADOOP_LOG_DIR \
     && mkdir -p /grid/0 \
     && chown -R "$HADOOP_USER" /opt/barbarian \
+    && chown -R "$HADOOP_USER" /opt/bash \
     && chown -R "$HADOOP_USER" /grid/0 \
     && chown -R "$HADOOP_USER" /opt/java8 \
     && chown -R "$HADOOP_USER" /opt/glibc \

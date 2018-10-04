@@ -25,6 +25,7 @@ RUN ln -s /opt/barbarian/control/basename /usr/bin/basename
 RUN ln -s /opt/barbarian/control/which /usr/bin/which
 RUN ln -s /opt/barbarian/control/env /usr/bin/env
 RUN ln -s /opt/barbarian/control/declare /usr/bin/declare
+RUN ln -s /opt/barbarian/control/readlink /usr/bin/readlink
 
 RUN echo "$HADOOP_USER:!::1000:::::" >> /etc/shadow
 RUN echo "$HADOOP_USER:!::1000:::::" >> /etc/shadow

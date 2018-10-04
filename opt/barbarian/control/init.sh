@@ -65,3 +65,13 @@ echo "/opt/glibc/usr/lib" >> /opt/glibc/usr/glibc-compat/etc/ld.so.conf
 
 chmod +x $JAVA_INSTALL_DIR/$JAVA_INSTALL_VERSION/bin/java
 chmod +x $JAVA_INSTALL_DIR/$JAVA_INSTALL_VERSION/jre/bin/java
+
+# fix host resolution
+HOSTNAME=$(cat /etc/hostname)
+echo "127.0.0.1 localhost $HOSTNAME" > /etc/hosts
+echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
+
+# YARN actually stops with an error if it doesn't find the Bash shell onboard.
+# remains to be seen if it is really a requirement or not.
+# for now we'll just fake a bash shell
+ln -s /bin/mksh /bin/bash

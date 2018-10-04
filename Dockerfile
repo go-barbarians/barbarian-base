@@ -4,17 +4,18 @@ ENV HADOOP_USER=hadoop \
     HADOOP_LOG_DIR=/var/log/hadoop \
     JAVA_HOME=/opt/java8/jdk-8u181-ojdkbuild-linux-x64 \
     HADOOP_HOME=/opt/barbarian/hadoop \
-    HADOOP_INSTALL=$HADOOP_HOME \
-    HADOOP_COMMON_HOME=$HADOOP_HOME \
-    HADOOP_YARN_HOME=$HADOOP_HOME \
-    YARN_HOME=$HADOOP_HOME \
-    HADOOP_MAPRED_HOME=$HADOOP_HOME \
-    HADOOP_HDFS_HOME=$HADOOP_HOME \
-    HADOOP_PREFIX=$HADOOP_HOME \
-    HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
+    HADOOP_INSTALL=/opt/barbarian/hadoop \
+    HADOOP_COMMON_HOME=/opt/barbarian/hadoop \
+    HADOOP_YARN_HOME=/opt/barbarian/hadoop \
+    YARN_HOME=/opt/barbarian/hadoop \
+    HADOOP_MAPRED_HOME=/opt/barbarian/hadoop \
+    HADOOP_HDFS_HOME=/opt/barbarian/hadoop \
+    HADOOP_PREFIX=/opt/barbarian/hadoop \
+    HADOOP_CONF_DIR=/opt/barbarian/hadoop/etc/hadoop \
     YARN_CONF_DIR=/opt/barbarian/hadoop/etc/hadoop \
     HADOOP_CLASSPATH=/opt/barbarian/hadoop/etc/hadoop:/opt/barbarian/hadoop/share/hadoop/common/lib/*:/opt/barbarian/hadoop/share/hadoop/common/*:/opt/barbarian/hadoop/share/hadoop/yarn/*:/opt/barbarian/hadoop/share/hadoop/yarn/lib/*:/opt/barbarian/tez/conf:/opt/barbarian/hive/lib/*:/opt/barbarian/tez/lib/*:/opt/barbarian/tez/* \
-    CONTROL_HOME=/opt/barbarian/control
+    CONTROL_HOME=/opt/barbarian/control \
+    HADOOP_HEAPSIZE=2g
 
 RUN ln -s /opt/python27/bin/python /usr/bin/python
 RUN mkdir -p /opt/barbarian

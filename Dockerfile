@@ -4,11 +4,14 @@ ENV HADOOP_USER=hadoop \
     HADOOP_LOG_DIR=/var/log/hadoop \
     JAVA_HOME=/opt/java8/jdk-8u181-ojdkbuild-linux-x64 \
     HADOOP_HOME=/opt/barbarian/hadoop \
-    HADOOP_COMMON_HOME=/opt/barbarian/hadoop/share/hadoop/common \
-    HADOOP_YARN_HOME=/opt/barbarian/hadoop/share/hadoop/yarn \
-    HADOOP_MAPRED_HOME=/opt/barbarian/hadoop/share/hadoop/mapreduce \
-    HADOOP_HDFS_HOME=/opt/barbarian/hadoop/share/hadoop/hdfs \
-    HADOOP_CONF_DIR=/opt/barbarian/hadoop/etc/hadoop \
+    HADOOP_INSTALL=$HADOOP_HOME \
+    HADOOP_COMMON_HOME=$HADOOP_HOME \
+    HADOOP_YARN_HOME=$HADOOP_HOME \
+    YARN_HOME=$HADOOP_HOME \
+    HADOOP_MAPRED_HOME=$HADOOP_HOME \
+    HADOOP_HDFS_HOME=$HADOOP_HOME \
+    HADOOP_PREFIX=$HADOOP_HOME \
+    HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
     YARN_CONF_DIR=/opt/barbarian/hadoop/etc/hadoop \
     HADOOP_CLASSPATH=/opt/barbarian/hadoop/etc/hadoop:/opt/barbarian/hadoop/share/hadoop/common/lib/*:/opt/barbarian/hadoop/share/hadoop/common/*:/opt/barbarian/hadoop/share/hadoop/yarn/*:/opt/barbarian/hadoop/share/hadoop/yarn/lib/*:/opt/barbarian/tez/conf:/opt/barbarian/hive/lib/*:/opt/barbarian/tez/lib/*:/opt/barbarian/tez/* \
     CONTROL_HOME=/opt/barbarian/control
@@ -52,8 +55,8 @@ RUN ln -s /opt/glibc/usr/glibc-compat/etc/ld.so.conf /etc/ld.so.conf
 # whole system path needs to either belong to the hadoop user, or the hadoop user needs to be root.
 RUN mkdir -p $HADOOP_LOG_DIR \
     && mkdir -p /grid/0 \
-    && mkdir -p /home/$HADOOP_USER \
     && chown -R "$HADOOP_USER" /opt/barbarian \
+    && chown -R "$HADOOP_USER" /grid/0 \
     && chown -R "$HADOOP_USER" /opt/java8 \
     && chown -R "$HADOOP_USER" /opt/glibc \
     && chown -R "$HADOOP_USER" /opt/python27 \

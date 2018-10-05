@@ -42,6 +42,11 @@ then
 	BASH_READLINE_APK=readline-6.3.008-r4.apk
 fi
 
+if [[ -z "${BASH_TERMINFO_APK}" ]]
+then
+	BASH_TERMINFO_APK=ncurses-terminfo-base-6.0_p20170701-r0.apk
+fi
+
 PYTHON=/opt/python27/bin/python
 DOWNLOADER=/opt/barbarian/control/download.py
 UNTAR=/opt/barbarian/control/untar.py
@@ -94,11 +99,13 @@ echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.c
 python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_APK -t /tmp/bash.apk
 python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_NCURSES_APK -t /tmp/ncurses.apk
 python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_READLINE_APK -t /tmp/readline.apk
+python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_TERMINFO_APK -t /tmp/terminfo.apk
 
 # this path is prebaked, along with a symlink to /bin/bash and LD_LIBRARY_PATH env var.
 cd /opt/bash
 python /opt/barbarian/control/untar.py /tmp/bash.apk
 python /opt/barbarian/control/untar.py /tmp/ncurses.apk
 python /opt/barbarian/control/untar.py /tmp/readline.apk
+python /opt/barbarian/control/untar.py /tmp/terminfo.apk
 
 cd /tmp

@@ -29,7 +29,6 @@ COPY ./opt/barbarian/ignite/libs/ignite-hadoop/ignite-*.jar /opt/barbarian/hadoo
 RUN ln -s /opt/barbarian/control/basename /usr/bin/basename
 RUN ln -s /opt/barbarian/control/which /usr/bin/which
 RUN ln -s /opt/barbarian/control/env /usr/bin/env
-RUN ln -s /opt/barbarian/control/declare /usr/bin/declare
 RUN ln -s /opt/barbarian/control/readlink /usr/bin/readlink
 RUN ln -s /opt/barbarian/control/regex_match /usr/bin/regex_match
 RUN ln -s /usr/bin/nawk /usr/bin/awk
@@ -53,9 +52,12 @@ RUN echo "$HADOOP_USER:x:1000:1000:$HADOOP_USER:/opt/barbarian:/bin/mksh" >> /et
 RUN ln -s /opt/glibc/usr/glibc-compat/etc/ld.so.cache /etc/ld.so.cache
 RUN ln -s /opt/glibc/usr/glibc-compat/etc/ld.so.conf /etc/ld.so.conf
 
-# bash is a mandatory prerequisite for Hadoop 3.
+# GNU bash is a mandatory prerequisite for Hadoop 3.x
 RUN mkdir -p /opt/bash
 RUN ln -s /opt/bash/bin/bash /bin/bash
+
+# terminfo is a prerequisite of Bash and Vim
+RUN ln -s /opt/bash/usr/share/terminfo /usr/share/terminfo
 
 # dynamically downloading and installing glibc and java at pod initialization time means the 
 # whole system path needs to either belong to the hadoop user, or the hadoop user needs to be root.

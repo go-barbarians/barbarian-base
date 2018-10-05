@@ -17,7 +17,8 @@ ENV HADOOP_USER=hadoop \
     CONTROL_HOME=/opt/barbarian/control \
     HADOOP_HEAPSIZE=2g \
     LD_LIBRARY_PATH=/opt/bash/usr/lib \
-    TERMINFO_DIRS=/etc/terminfo
+    TERMINFO_DIRS=/etc/terminfo \
+    VIMRUNTIME=/usr/share/vim/vim81
 
 RUN ln -s /opt/python27/bin/python /usr/bin/python
 RUN mkdir -p /opt/barbarian
@@ -59,6 +60,14 @@ RUN ln -s /opt/bash/bin/bash /bin/bash
 
 # terminfo is a prerequisite of Bash and Vim
 RUN ln -s /opt/bash/etc/terminfo /etc/terminfo
+
+RUN echo "set backspace=indent,eol,start" > /root/.vimrc
+RUN echo "set number" >> /root/.vimrc
+RUN echo "syntax on" >> /root/.vimrc
+
+RUN echo "set backspace=indent,eol,start" > /opt/barbarian/.vimrc
+RUN echo "set number" >> /opt/barbarian/.vimrc
+RUN echo "syntax on" >> /opt/barbarian/.vimrc
 
 # dynamically downloading and installing glibc and java at pod initialization time means the 
 # whole system path needs to either belong to the hadoop user, or the hadoop user needs to be root.

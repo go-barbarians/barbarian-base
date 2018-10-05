@@ -16,9 +16,7 @@ ENV HADOOP_USER=hadoop \
     HADOOP_CLASSPATH=/opt/barbarian/hadoop/etc/hadoop:/opt/barbarian/hadoop/share/hadoop/common/lib/*:/opt/barbarian/hadoop/share/hadoop/common/*:/opt/barbarian/hadoop/share/hadoop/yarn/*:/opt/barbarian/hadoop/share/hadoop/yarn/lib/*:/opt/barbarian/tez/conf:/opt/barbarian/hive/lib/*:/opt/barbarian/tez/lib/*:/opt/barbarian/tez/* \
     CONTROL_HOME=/opt/barbarian/control \
     HADOOP_HEAPSIZE=2g \
-    LD_LIBRARY_PATH=/opt/bash/usr/lib \
-    TERMINFO_DIRS=/etc/terminfo \
-    VIMRUNTIME=/usr/share/vim/vim81
+    LD_LIBRARY_PATH=/opt/bash/usr/lib
 
 RUN ln -s /opt/python27/bin/python /usr/bin/python
 RUN mkdir -p /opt/barbarian
@@ -43,9 +41,6 @@ RUN ln -s /opt/glibc/usr/glibc-compat/lib/ld-linux-x86-64.so.2 /lib/ld-linux-x86
 RUN ln -s /opt/glibc/usr/glibc-compat/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
 RUN ln -s /opt/glibc/usr/glibc-compat /usr/glibc-compat
 
-RUN mkdir -p /etc/profile.d
-RUN echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh
-
 RUN echo "$HADOOP_USER:!::1000:::::" >> /etc/shadow
 RUN echo "$HADOOP_USER:!::1000:::::" >> /etc/shadow
 RUN echo "$HADOOP_USER:x:1000:$HADOOP_USER" >> /etc/group
@@ -58,20 +53,13 @@ RUN ln -s /opt/glibc/usr/glibc-compat/etc/ld.so.conf /etc/ld.so.conf
 RUN mkdir -p /opt/bash
 RUN ln -s /opt/bash/bin/bash /bin/bash
 
-# terminfo is a prerequisite of Bash and Vim
-RUN ln -s /opt/bash/etc/terminfo /etc/terminfo
-
-RUN mkdir -p /root
-RUN echo "set backspace=indent,eol,start" > /root/.vimrc
-RUN echo "set number" >> /root/.vimrc
-RUN echo "syntax on" >> /root/.vimrc
-
 RUN echo "set backspace=indent,eol,start" > /opt/barbarian/.vimrc
 RUN echo "set number" >> /opt/barbarian/.vimrc
 RUN echo "syntax on" >> /opt/barbarian/.vimrc
 
-# dynamically downloading and installing glibc and java at pod initialization time means the 
-# whole system path needs to either belong to the hadoop user, or the hadoop user needs to be root.
+# dynamically downloading and installing glibc and java at pod initialization time means that 
+# some system paths need to either belong to the hadoop user, or the hadoop user needs to be root.
+# by relocating the paths to /opt and symlinking, we can limit any privilege escalation somewhat.
 RUN mkdir -p $HADOOP_LOG_DIR \
     && mkdir -p /grid/0 \
     && chown -R "$HADOOP_USER" /opt/barbarian \

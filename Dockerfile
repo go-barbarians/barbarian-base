@@ -61,6 +61,7 @@ RUN ln -s /opt/bash/bin/bash /bin/bash
 # terminfo is a prerequisite of Bash and Vim
 RUN ln -s /opt/bash/etc/terminfo /etc/terminfo
 
+RUN mkdir -p /root
 RUN echo "set backspace=indent,eol,start" > /root/.vimrc
 RUN echo "set number" >> /root/.vimrc
 RUN echo "syntax on" >> /root/.vimrc

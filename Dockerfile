@@ -61,7 +61,7 @@ RUN echo "set backspace=indent,eol,start" > /opt/barbarian/.vimrc
 RUN echo "set number" >> /opt/barbarian/.vimrc
 RUN echo "syntax on" >> /opt/barbarian/.vimrc
 
-RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
+#RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
 # dynamically downloading and installing glibc and java at pod initialization time means that 
 # some system paths need to either belong to the hadoop user, or the hadoop user needs to be root.

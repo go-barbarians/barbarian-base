@@ -34,6 +34,7 @@ RUN ln -s /opt/barbarian/control/which /usr/bin/which
 RUN ln -s /opt/barbarian/control/env /usr/bin/env
 RUN ln -s /opt/barbarian/control/readlink /usr/bin/readlink
 RUN ln -s /opt/barbarian/control/regex_match /usr/bin/regex_match
+RUN ln -s /opt/barbarian/control/hostname /usr/bin/hostname
 RUN ln -s /usr/bin/nawk /usr/bin/awk
 
 RUN mkdir -p /opt/java8

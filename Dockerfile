@@ -8,15 +8,18 @@ ENV HADOOP_USER=hadoop \
     HADOOP_COMMON_HOME=/opt/barbarian/hadoop \
     HADOOP_YARN_HOME=/opt/barbarian/hadoop \
     YARN_HOME=/opt/barbarian/hadoop \
+    IGNITE_HOME=/opt/barbarian/ignite \
+    IGNITE_CONF_DIR=/opt/barbarian/ignite/config \
     HADOOP_MAPRED_HOME=/opt/barbarian/hadoop \
     HADOOP_HDFS_HOME=/opt/barbarian/hadoop \
     HADOOP_PREFIX=/opt/barbarian/hadoop \
     HADOOP_CONF_DIR=/opt/barbarian/hadoop/etc/hadoop \
     YARN_CONF_DIR=/opt/barbarian/hadoop/etc/hadoop \
-    HADOOP_CLASSPATH=/opt/barbarian/hadoop/etc/hadoop:/opt/barbarian/hadoop/share/hadoop/common/lib/*:/opt/barbarian/hadoop/share/hadoop/common/*:/opt/barbarian/hadoop/share/hadoop/yarn/*:/opt/barbarian/hadoop/share/hadoop/yarn/lib/*:/opt/barbarian/tez/conf:/opt/barbarian/hive/lib/*:/opt/barbarian/tez/lib/*:/opt/barbarian/tez/* \
+    HADOOP_CLASSPATH=/opt/barbarian/ignite/config:/opt/barbarian/hadoop/etc/hadoop:/opt/barbarian/hadoop/share/hadoop/common/lib/*:/opt/barbarian/hadoop/share/hadoop/common/*:/opt/barbarian/hadoop/share/hadoop/yarn/*:/opt/barbarian/hadoop/share/hadoop/yarn/lib/*:/opt/barbarian/tez/conf:/opt/barbarian/hive/lib/*:/opt/barbarian/tez/lib/*:/opt/barbarian/tez/* \
     CONTROL_HOME=/opt/barbarian/control \
     HADOOP_HEAPSIZE=2g \
-    LD_LIBRARY_PATH=/opt/bash/usr/lib
+    LD_LIBRARY_PATH=/opt/bash/usr/lib \
+    IGNITE_CUSTOM_CLASSPATH=/opt/barbarian/ignite/config:/opt/barbarian/hadoop/share/hadoop/common/lib/*:/opt/barbarian/hadoop/share/hadoop/common/*:/opt/barbarian/hadoop/share/hadoop/tools/*:/opt/barbarian/hadoop/share/hadoop/tools/lib/*
 
 RUN ln -s /opt/python27/bin/python /usr/bin/python
 RUN mkdir -p /opt/barbarian

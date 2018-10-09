@@ -23,6 +23,7 @@ ENV HADOOP_USER=hadoop \
 
 RUN ln -s /opt/python27/bin/python /usr/bin/python
 RUN mkdir -p /opt/barbarian
+RUN mkdir -p /etc/hadoop
 
 COPY ./opt/barbarian/control /opt/barbarian/control
 COPY ./opt/barbarian/hadoop /opt/barbarian/hadoop

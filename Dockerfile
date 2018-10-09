@@ -80,5 +80,5 @@ RUN mkdir -p $HADOOP_LOG_DIR \
     && chown -R "$HADOOP_USER" /opt/python27 \
     && chown -R "$HADOOP_USER" $HADOOP_LOG_DIR \
     && chown "$HADOOP_USER" /etc/hosts \
-    && ln -s /opt/barbarian/hadoop/etc/hadoop /etc/hadoop
+    && ln -s /opt/barbarian/hadoop/etc/hadoop /etc/hadoop/conf
 

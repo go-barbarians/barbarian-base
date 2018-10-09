@@ -28,6 +28,7 @@ COPY ./opt/barbarian/control /opt/barbarian/control
 COPY ./opt/barbarian/hadoop /opt/barbarian/hadoop
 COPY ./opt/barbarian/ignite/libs/ignite-*.jar /opt/barbarian/hadoop/share/hadoop/common/lib/
 COPY ./opt/barbarian/ignite/libs/ignite-hadoop/ignite-*.jar /opt/barbarian/hadoop/share/hadoop/common/lib/
+COPY ./getdomainname /opt/barbarian/control/getdomainname
 
 RUN ln -s /opt/barbarian/control/basename /usr/bin/basename
 RUN ln -s /opt/barbarian/control/which /usr/bin/which

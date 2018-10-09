@@ -12,6 +12,7 @@ steps:
       - aws configure set default.region eu-west-1
       - aws s3 cp s3://mvn.barbarians.io/apache-ignite-hadoop-$IGNITE_BUILD_NUMBER-bin.zip .
       - aws s3 cp s3://mvn.barbarians.io/hadoop-$HADOOP_BUILD_NUMBER.tar.gz .
+      - aws s3 cp s3://mvn.barbarians.io/getdomainname .
       - tar -xzf hadoop-$HADOOP_BUILD_NUMBER.tar.gz
       - unzip -o apache-ignite-hadoop-$IGNITE_BUILD_NUMBER-bin.zip
       - mkdir -p opt/barbarian

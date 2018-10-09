@@ -37,6 +37,9 @@ RUN ln -s /opt/barbarian/control/readlink /usr/bin/readlink
 RUN ln -s /opt/barbarian/control/regex_match /usr/bin/regex_match
 RUN ln -s /opt/barbarian/control/hostname /usr/bin/hostname
 RUN ln -s /usr/bin/nawk /usr/bin/awk
+RUN ln -s /opt/barbarian/control/getdomainname /usr/bin/getdomainname
+
+RUN chmod +x /usr/bin/getdomainname
 
 RUN mkdir -p /opt/java8
 RUN mkdir -p /opt/glibc
@@ -75,6 +78,7 @@ RUN mkdir -p $HADOOP_LOG_DIR \
     && chown -R "$HADOOP_USER" /opt/java8 \
     && chown -R "$HADOOP_USER" /opt/glibc \
     && chown -R "$HADOOP_USER" /opt/python27 \
+    && chown -R "$HADOOP_USER" $HADOOP_LOG_DIR \
     && chown "$HADOOP_USER" /etc/hosts \
     && ln -s /opt/barbarian/hadoop/etc/hadoop /etc/hadoop
 

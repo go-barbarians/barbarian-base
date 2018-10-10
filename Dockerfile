@@ -29,9 +29,9 @@ RUN mkdir -p /opt/barbarian/ignite/libs
 COPY ./opt/barbarian/control /opt/barbarian/control
 COPY ./opt/barbarian/hadoop /opt/barbarian/hadoop
 COPY ./opt/barbarian/ignite/libs/ignite-*.jar /opt/barbarian/hadoop/share/hadoop/common/lib/
-COPY ./opt/barbarian/ignite/libs/ignite-*.jar /opt/barbarian/ignite/libs
+COPY ./opt/barbarian/ignite/libs/ignite-*.jar /opt/barbarian/ignite/libs/
 COPY ./opt/barbarian/ignite/libs/ignite-hadoop/ignite-*.jar /opt/barbarian/hadoop/share/hadoop/common/lib/
-COPY ./opt/barbarian/ignite/libs/ignite-hadoop/ignite-*.jar /opt/barbarian/ignite/libs
+COPY ./opt/barbarian/ignite/libs/ignite-hadoop/ignite-*.jar /opt/barbarian/ignite/libs/
 COPY ./getdomainname /opt/barbarian/control/getdomainname
 
 RUN ln -s /opt/barbarian/control/basename /usr/bin/basename

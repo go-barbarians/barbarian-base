@@ -65,6 +65,10 @@ RUN ln -s /opt/glibc/usr/glibc-compat/etc/ld.so.conf /etc/ld.so.conf
 RUN mkdir -p /opt/bash
 RUN ln -s /opt/bash/bin/bash /bin/bash
 
+# GNU gzip is a mandatory prerequisite for Hadoop
+RUN ln -s /opt/bash/bin/gzip /usr/bin/gzip
+RUN ln -s /opt/bash/bin/gunzip /usr/bin/gunzip
+
 RUN echo "set backspace=indent,eol,start" > /opt/barbarian/.vimrc
 RUN echo "set number" >> /opt/barbarian/.vimrc
 RUN echo "syntax on" >> /opt/barbarian/.vimrc

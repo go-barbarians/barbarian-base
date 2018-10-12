@@ -64,6 +64,10 @@ then
 	BASH_NCURSES_APK=ncurses-libs-6.0_p20170701-r0.apk
 fi
 
+if [[ -z "${GZIP_APK}" ]]
+then
+	GZIP_APK=gzip-1.6-r1.apk
+fi
 
 PYTHON=/opt/python27/bin/python
 DOWNLOADER=/opt/barbarian/control/download.py
@@ -77,7 +81,7 @@ $PYTHON $PIP_INSTALLER
 $PIP install urllib3
 
 for pkg in glibc-${GLIBC_VERSION} glibc-bin-${GLIBC_VERSION} glibc-i18n-${GLIBC_VERSION}
-do 
+do
 	echo "downloading ${pkg}.apk"
 	$PYTHON $DOWNLOADER -u ${GLIBC_REPO}/releases/download/${GLIBC_VERSION}/${pkg}.apk -t /tmp/${pkg}.apk
 done
@@ -126,6 +130,9 @@ python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_NCURSES_APK -t /tm
 echo "downloading ${BASH_READLINE_APK}"
 python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_READLINE_APK -t /tmp/readline.apk
 
+echo "downloading ${GZIP_APK}"
+python /opt/barbarian/control/download.py -u $BASH_REPO/$GZIP_APK -t /tmp/gzip.apk
+
 # this path is prebaked, along with a symlink to /bin/bash and LD_LIBRARY_PATH env var.
 cd /opt/bash
 echo "unpacking $BASH_APK"
@@ -136,6 +143,9 @@ python /opt/barbarian/control/untar.py /tmp/ncurses.apk
 
 echo "unpacking $BASH_READLINE_APK"
 python /opt/barbarian/control/untar.py /tmp/readline.apk
+
+echo "unpacking $GZIP_APK"
+python /opt/barbarian/control/untar.py /tmp/gzip.apk
 
 cd /tmp
 

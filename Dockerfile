@@ -69,6 +69,9 @@ RUN ln -s /opt/bash/usr/lib/libncursesw.so.6 /usr/lib/libncursesw.so.6.0
 RUN ln -s /opt/bash/usr/lib/libreadline.so.6 /usr/lib/libreadline.so.6
 RUN ln -s /opt/bash/usr/lib/libreadline.so.6 /usr/lib/libreadline.so.6.3
 
+# Hadoop hardcodes the mv coretool to /bin/mv
+RUN ln -s /usr/bin/mv /bin/mv
+
 RUN echo "set backspace=indent,eol,start" > /opt/barbarian/.vimrc
 RUN echo "set number" >> /opt/barbarian/.vimrc
 RUN echo "syntax on" >> /opt/barbarian/.vimrc

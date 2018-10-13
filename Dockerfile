@@ -76,13 +76,14 @@ RUN echo 'hosts: files mdns4_minimal dns mdns4' > /etc/nsswitch.conf
 # by relocating the paths to /opt and symlinking, we can limit any privilege escalation somewhat.
 RUN mkdir -p $HADOOP_LOG_DIR \
     && mkdir -p /grid/0 \
-    && chown -R "$HADOOP_USER" /opt/barbarian \
-    && chown -R "$HADOOP_USER" /opt/bash \
-    && chown -R "$HADOOP_USER" /grid/0 \
-    && chown -R "$HADOOP_USER" /opt/java8 \
-    && chown -R "$HADOOP_USER" /opt/glibc \
-    && chown -R "$HADOOP_USER" /opt/python27 \
-    && chown -R "$HADOOP_USER" $HADOOP_LOG_DIR \
-    && chown "$HADOOP_USER" /etc/hosts \
-    && ln -s /opt/barbarian/hadoop/etc/hadoop /etc/hadoop/conf
+    && chown -R $HADOOP_USER /opt/barbarian \
+    && chown -R $HADOOP_USER /opt/bash \
+    && chown -R $HADOOP_USER /grid \
+    && chown -R $HADOOP_USER /opt/java8 \
+    && chown -R $HADOOP_USER /opt/glibc \
+    && chown -R $HADOOP_USER /opt/python27 \
+    && chown -R $HADOOP_USER $HADOOP_LOG_DIR \
+    && ln -s /opt/barbarian/hadoop/etc/hadoop /etc/hadoop/conf \
+    && chgrp -R $HADOOP_USER /grid
+    && chmod -R 0755 /grid
 

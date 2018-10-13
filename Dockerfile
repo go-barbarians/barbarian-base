@@ -84,6 +84,6 @@ RUN mkdir -p $HADOOP_LOG_DIR \
     && chown -R $HADOOP_USER /opt/python27 \
     && chown -R $HADOOP_USER $HADOOP_LOG_DIR \
     && ln -s /opt/barbarian/hadoop/etc/hadoop /etc/hadoop/conf \
-    && chgrp -R $HADOOP_USER /grid
+    && chgrp -R $HADOOP_USER /grid \
     && chmod -R 0755 /grid
 

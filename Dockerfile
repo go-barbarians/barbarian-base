@@ -64,6 +64,10 @@ RUN ln -s /opt/glibc/usr/glibc-compat/etc/ld.so.conf /etc/ld.so.conf
 # GNU bash is a mandatory prerequisite for Hadoop 3.x
 RUN mkdir -p /opt/bash
 RUN ln -s /opt/bash/bin/bash /bin/bash
+RUN ln -s /opt/bash/usr/lib/libncursesw.so.6 /usr/lib/libncursesw.so.6
+RUN ln -s /opt/bash/usr/lib/libncursesw.so.6 /usr/lib/libncursesw.so.6.0
+RUN ln -s /opt/bash/usr/lib/libreadline.so.6 /usr/lib/libreadline.so.6
+RUN ln -s /opt/bash/usr/lib/libreadline.so.6 /usr/lib/libreadline.so.6.3
 
 RUN echo "set backspace=indent,eol,start" > /opt/barbarian/.vimrc
 RUN echo "set number" >> /opt/barbarian/.vimrc

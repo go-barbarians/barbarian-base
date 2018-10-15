@@ -37,7 +37,6 @@ COPY ./getdomainname /opt/barbarian/control/getdomainname
 
 RUN ln -s /opt/barbarian/control/basename /usr/bin/basename
 RUN ln -s /opt/barbarian/control/which /usr/bin/which
-RUN ln -s /opt/barbarian/control/env /usr/bin/env
 RUN ln -s /opt/barbarian/control/readlink /usr/bin/readlink
 RUN ln -s /opt/barbarian/control/regex_match /usr/bin/regex_match
 RUN ln -s /opt/barbarian/control/mktemp /usr/bin/mktemp

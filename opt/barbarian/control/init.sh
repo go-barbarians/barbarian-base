@@ -112,10 +112,6 @@ echo "/opt/glibc/usr/lib" >> /opt/glibc/usr/glibc-compat/etc/ld.so.conf
 chmod +x $JAVA_INSTALL_DIR/$JAVA_INSTALL_VERSION/bin/java
 chmod +x $JAVA_INSTALL_DIR/$JAVA_INSTALL_VERSION/jre/bin/java
 
-# fix host resolution
-HOSTNAME=$(cat /etc/hostname)
-echo "127.0.0.1 localhost ${HOSTNAME}" > /etc/hosts
-
 echo "downloading ${BASH_APK}"
 python /opt/barbarian/control/download.py -u $BASH_REPO/$BASH_APK -t /tmp/bash.apk
 

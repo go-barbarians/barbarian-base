@@ -37,7 +37,7 @@ steps:
     type: push
     description: Push image to repo
     candidate: '${{build_image}}'
-    tag: unstable
+    tag: latest
     credentials:
       username: '${{DOCKER_USER}}'
       password: '${{DOCKER_PASS}}'

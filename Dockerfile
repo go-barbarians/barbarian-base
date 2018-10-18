@@ -20,7 +20,8 @@ ENV HADOOP_USER=hadoop \
     HADOOP_HEAPSIZE=2g \
     LD_LIBRARY_PATH=/opt/bash/usr/lib \
     IGNITE_CUSTOM_CLASSPATH=/opt/barbarian/ignite/config:/opt/barbarian/hadoop/share/hadoop/common/lib/*:/opt/barbarian/hadoop/share/hadoop/common/*:/opt/barbarian/hadoop/share/hadoop/tools/*:/opt/barbarian/hadoop/share/hadoop/tools/lib/* \
-    LLAP_DAEMON_USER_CLASSPATH=/opt/barbarian/hadoop/share/hadoop/yarn/*:/opt/barbarian/hadoop/share/hadoop/yarn/lib/*
+    LLAP_DAEMON_USER_CLASSPATH=/opt/barbarian/hadoop/share/hadoop/yarn/*:/opt/barbarian/hadoop/share/hadoop/yarn/lib/* \
+    HADOOP_OPTS=-XX:+UnlockExperimentalVMOptions
 
 RUN ln -s /opt/python27/bin/python /usr/bin/python
 RUN mkdir -p /opt/barbarian
